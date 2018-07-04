@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool mark1[105], mark2[105];
+char fst[105], sec[105], res[210];
+int m, n, t[105][105];
+void lcs(){
+    memset(mark1,false,sizeof(mark1));
+    memset(mark2,false,sizeof(mark2));
+   memset(t,0,sizeof(t));
+    for(int i=1;i<=m;i++)  for(int j=1;j<=n;j++)     t[i][j] =  (fst[i-1] == sec[j-1] )? t[i-1][j-1] + 1 :max(t[i-1][j], t[i][j-1]);
+   int x = m, y = n;
+    while(true){
+        if(x == 0 || y == 0)
+            break;
+        if(fst[x-1] == sec[y-1]){
+            mark1[x-1] = true;
+            mark2[y-1] = true;
+            x--;y--;
+        }
+        else
+            (t[x-1][y] >= t[x][y-1]) ? (x--) : (y--);
+    }
+}
+int main(){
+    while(scanf("%s", fst) != EOF){
+        scanf("%s", sec);
+        m = strlen(fst), n = strlen(sec);
+        lcs();
+        int i = 0, j = 0, idx = 0;
+        while(i < m && j < n){
+            for(;i<m && !mark1[i];i++)res[idx++] = fst[i];
+            for(;j<n && !mark2[j];j++)res[idx++] = sec[j];
+             while(i < m && j < n && mark1[i] && mark2[j]){
+                res[idx++] = fst[i];
+                i++;
+                j++;
+            }
+            
+        }
+        while(i < m)
+            res[idx++] = fst[i++];
+        while(j < n)
+            res[idx++] = sec[j++];
+        res[idx] = 0;
+        printf("%s\n", res);
+    }
+ 
+    return 0;
+}

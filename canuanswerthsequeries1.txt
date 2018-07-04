@@ -1,0 +1,86 @@
+
+Selected submissions:
+?
+Source code 19740911
+
+SPOJ submission 19740911 (C++ 4.3.2) plaintext list. Status: AC, problem GSS1, contest SPOJ. By krishnakatikam (krishnakatiakm), 2017-07-05 22:06:29.
+
+    #include<bits/stdc++.h>
+    using namespace std;
+    class Node
+    {
+    public:
+        int pre,suff,sum,best;
+        public:
+        void assign(int val)
+        {
+          pre=suff=sum=best=val;
+         }
+        void calc(Node l,Node r)
+        {
+            sum=l.sum+r.sum;
+            pre=max(l.pre,l.sum+r.pre);
+            suff=max(r.suff,r.sum+l.suff);
+            best=max(max(l.suff+r.pre,sum),max(l.best,r.best));
+     
+       // cout<< pre << suff<< sum << best<<endl;
+        }
+    };
+    Node tree[200005];
+    int ar[50005];
+    void build_tree(int node,int ss,int se)
+    {
+        if(ss==se)
+        {
+            tree[node].assign(ar[ss]);
+        }
+        else
+        {
+            int mid=(ss+se)/2;
+            int l=2*node;
+            int r=l+1;
+            build_tree(l,ss,mid);
+            build_tree(r,mid+1,se);
+            tree[node].calc(tree[l],tree[r]);
+        }
+    }
+    Node query(int node,int ss,int se,int l,int r)
+    {
+        if(ss>se || ss>r ||se<l)
+        {
+            Node a;
+            a.assign(-100000);
+            return a;
+        }
+        if(ss>=l && se<=r)
+            return tree[node];
+        else
+        {
+            int mid=(ss+se)/2;
+            Node a=query(2*node,ss,mid,l,r);
+            Node b=query(2*node+1,mid+1,se,l,r);
+            Node res;
+            res.calc(a,b);
+            return res;
+        }
+    }
+    int main()
+    {
+        int n;
+        cin>>n;
+        for(int i=1;i<=n;i++)
+            scanf("%d",&ar[i]);
+        build_tree(1,1,n);
+        int q;
+        cin>>q;
+        while(q--)
+        {
+            int l,r;
+            scanf("%d%d",&l,&r);
+            Node res=query(1,1,n,l,r);
+            printf("%d\n",res.best);
+        }
+        return 0;
+    }
+     
+

@@ -1,0 +1,71 @@
+    #include<bits/stdc++.h>
+    #define ll long long int
+    using namespace std;
+    vector<int> prime;
+    int test[1000000+5];
+    void seive()
+    {
+    	for (int i = 2; i < 1e6; ++i)
+    	{
+    		if (!test[i])
+    		{
+    			prime.push_back(i);
+    			for (int j = i+i; j < 1e6; j+=i)
+    			{
+    				test[j]=1;
+    			}
+    		}
+    	}
+    }
+    void segseive(int L,int R)
+    {
+    	for (int i = 0; i < prime.size() && prime[i]*prime[i] <=R; ++i)
+    	{
+     
+    		int j = (L/prime[i])*prime[i];
+    		if (j<L)
+    		{
+    			j+=prime[i];
+    		}
+    		for (; j <=R; j+=prime[i])
+    		{
+    			test[j-L]=1;
+    		}
+    	}
+    	for (int i = max(2,L); i <=R; ++i)
+    	{
+    		if (!test[i-L])
+    		{
+    			printf("%d\n",i);
+    		}
+    	}
+    }
+     
+    int main()
+    {		
+    	seive();
+    	int t;
+    	scanf("%d",&t);
+    	while(t--)
+    	{
+    		int L,R;
+    		memset(test,0,sizeof test);
+    		scanf("%d%d",&L,&R);
+    		if (R>1e5)
+    		{
+    			segseive(L,R);
+    		}
+    		else
+    		{
+    			int index=lower_bound(prime.begin(),prime.end(),L)-prime.begin();
+    			for (int i = index; prime[i] <=R; ++i)
+    			{
+    				printf("%d\n",prime[i]);
+    			}
+    		}
+    		
+    	}
+    	return 0;
+    }  
+     
+

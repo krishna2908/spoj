@@ -1,0 +1,71 @@
+    #include<bits/stdc++.h>
+    //#define ALPHABETS 10
+    #define max 10
+     
+    using namespace std;
+     
+    struct node
+    {
+    	struct node * children[max];
+         bool mark;
+    };
+     
+    bool Insert(struct node * root, char text[])
+    {
+    	int i = 0;
+    	struct node * temp=root;
+    	while (text[i] != '\0') {
+    		if (temp->mark==true) {
+    			 return false;
+    			break;
+    		  }
+    		if (temp->children[text[i] - '0'] == NULL) {
+    			temp->children[text[i] - '0'] = (struct node *) calloc(1,sizeof(struct node));
+    		}	
+    		temp = temp->children[text[i] - '0'];
+    		i++;
+    	}
+    	temp->mark=true;
+    	for (int j = 0; j < max; ++j) {
+    		if (temp->children[j] != NULL) {
+    			return  false;
+    		}
+    	}
+    	return true;
+    }
+    int main()
+    {
+    	int t, n, i;
+     
+    	 cin>>t;
+     
+    	while (t--) {
+    		  cin>>n;
+    		  
+     
+    		struct node * root = (struct node *) calloc (1,sizeof(struct node));
+    		char word[max + 1];
+    		bool result = true;
+     
+    		for (i = 0; i < n; ++i) {
+    			 cin>>word;
+     
+    			if(!Insert(root, word)) {
+    				result = false;
+    			}
+    		}
+     
+    		if (result) {
+    			cout<<"YES\n";
+    		} else {
+    			cout<<"NO\n";
+    		}
+     
+    		free(root);
+    	}
+     
+    	return 0;
+    }
+     
+     
+

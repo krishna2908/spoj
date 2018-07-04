@@ -1,0 +1,142 @@
+    #include<biits/stdc++.h>
+    using namespace std;
+    # define limit 1000000000
+    # define max 100010
+    # define gc getchar_unlocked
+    # define lb(p)  lower_bound((p->indices).begin(),(p->indices).end(),l) 
+    # define ub(p)  upper_bound((p->indices).begin(),(p->indices).end(),r) 
+    vector<int> :: iterator it,it1,it2;                     
+    int msb,ind = 0,k,arr[max],l,r;
+    struct trie
+    {
+        trie * child[2];
+        vector<int>indices;
+    } *root , *nn , *temp ;
+    trie * getnode()
+    {
+        nn = new trie;
+        nn->child[0] = nn->child[1] = NULL;
+        return nn;
+    }
+    void insert(int key)
+    {
+          trie * temp = root;
+          (temp->indices).push_back(ind);
+          for(int i = msb; i >-1; i--)
+       {
+          bool cb = key & (1<<i) ;
+          if(!temp->child[cb])
+               temp->child[cb] = getnode();
+          temp = temp->child[cb]; //cout<<ind<<endl;
+          (temp->indices).push_back(ind);
+       }
+    }
+    void signbithandler()
+    {
+                      if(temp->child[1])
+                   {
+                        it1 = lb(temp->child[1]);
+                        it2 = ub(temp->child[1]);
+                              if(it2-it1)
+                           {  
+                                          if(k<=it2-it1)
+                                      { 
+                                           temp = temp->child[1];
+                                           return;
+                                       }
+                                           else
+                                       {
+                                           k -= it2-it1;
+                                           temp = temp->child[0];
+                                           return;
+                                        }
+                            }
+                               else
+                            {
+                                 temp = temp->child[0];
+                                 return;                             
+                             }
+                    }
+                       else
+                    {
+                         temp = temp->child[0];
+                         return ;
+                     }
+    }
+    void ksmallgiver()
+    {
+               temp = root;
+               for(int i=msb ; i>0 ; i--)
+          {
+                  if(i==msb)     signbithandler();
+                       if(temp->child[0])
+                   {  //display(temp);
+                        it1 = lb(temp->child[0]);
+                        it2 = ub(temp->child[0]);
+                              if(it2-it1)
+                           {
+                                          if(k<=it2-it1)
+                                      {
+                                           temp = temp->child[0];
+                                           continue;
+                                       }
+                                           else
+                                       {
+                                           k -= it2-it1;
+                                           temp = temp->child[1];
+                                           continue;
+                                        }
+                            }
+                               else
+                            {
+                                 temp = temp->child[1];
+                                 continue;                             
+                             }
+                    }
+                       else
+                    {
+                         temp = temp->child[1];
+                         continue;
+                     }
+           }
+                printf("%d\n",arr[(temp->indices)[0]]);              
+    }
+    void scanint(int &x)
+    {
+        register int c = gc();
+        x = 0;
+        int neg = 0;
+        for(;((c<48 || c>57) && c != '-');c = gc());
+        if(c=='-') {neg=1;c=gc();}
+        for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+        if(neg) x=-x;
+    }
+    void scanposint(int &x)
+    {
+        register int c = gc();
+        x = 0;
+        for(;(c<48 || c>57);c = gc());
+        for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+    }
+    int main()
+    {
+            int n,q,key;
+            scanposint(n);scanposint(q);
+            msb = ceil(log2(limit))+1; // msb = 3;//cout<<msb<<endl;
+            root = getnode();
+            while(n--)
+           {
+               scanint(key);
+               ind++;
+               arr[ind] = key;
+               insert(key);// display(root);
+            }
+             while(q--)
+           {
+               scanposint(l);scanposint(r);scanposint(k);
+               ksmallgiver();
+            }
+     
+     return 0;
+    } 
+ 

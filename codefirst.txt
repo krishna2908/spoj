@@ -1,0 +1,42 @@
+    #include<bits/stdc++.h>
+    using namespace std;;
+    int f[100001],i,j,r,mn,val1,val2;
+    vector <bool> prime(100001,true);
+    int main()
+    {
+        f[0]=0;
+        f[1]=1;
+        f[2]=2;
+        for(i=4;i<=100000;i+=2) prime[i]=false;
+        r=sqrt(100000);
+        for(i=3;i<=r;i+=2)
+        {
+            if(prime[i]==true)
+            {
+                for(j=i*i;j<100001;j+=i) prime[j]=false;
+            }
+                }
+        for(i=3;i<100001;i++)
+        {
+            if(prime[i]==true)
+            {
+                f[i]=0;
+                continue;
+            }
+            r=sqrt(i);
+            for(j=1;j<=r;j++)
+            {
+                if(i%j==0)
+                {
+                   
+                    val1=j;
+                    val2=i/j;
+                }
+            }
+            f[i]=f[val1]+f[val2];
+        }
+        int x;
+        scanf("%d",&x);
+        printf("%d",f[x]);
+        return 0;
+    } 

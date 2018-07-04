@@ -1,0 +1,38 @@
+
+Selected submissions:
+?
+Source code 19569756
+
+SPOJ submission 19569756 (C++ 4.3.2) plaintext list. Status: AC, problem AIBOHP, contest SPOJ. By krishnakatikam (krishnakatiakm), 2017-06-07 17:18:16.
+
+    #include<bits/stdc++.h>
+    using namespace std;
+    int main()
+    {
+     int n,t;
+      cin>>t;
+      while(t--){
+      string str;
+     cin>>str;
+     n=str.length();
+     int table[n][n];
+      memset(table,0,sizeof(table));
+     // for(int i=0;i<n;i++)for(int j=0;j<n;j++)table[i][j]=0;
+     for(int l=2;l<=n;l++)
+     {
+       for(int i=0;i<=n-l;i++)
+       {
+         int j=l+i-1;
+         if(str[i]==str[j])
+            table[i][j]=table[i+1][j-1];
+         else
+           table[i][j]=1+min(table[i][j-1],table[i+1][j]);
+          }
+      }
+        cout<<table[0][n-1]<<endl;
+          
+      }
+       return 0;
+    }                
+     
+

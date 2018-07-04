@@ -1,0 +1,22 @@
+    #include <iostream>
+    using namespace std;
+     
+    int main()
+    {
+      
+        int k;
+        while(1)
+        {
+        	cin>>k;
+        	if(k!=42)
+        	{
+        		cout<<k<<"\n";
+        	}
+        
+        	else
+        	 break;
+        }
+       
+    	return 0;
+    }
+     

@@ -1,0 +1,52 @@
+    #include<bits/stdc++.h>
+    using namespace std;
+    const int MAX = 10011;
+    vector<int> result;
+    void smartNumber()
+    {
+    	// Initialize all numbers as not prime
+    	int primes[MAX] = {0};
+     
+    	// iterate to mark all primes and smart number
+    	// Traverse all numbers till maximum limit
+    	for (int i=2; i<MAX; i++)
+    	{
+    		// 'i' is maked as prime number because
+    		// it is not multiple of any other prime
+    		if (primes[i] == 0)
+    		{
+    			primes[i] = 1;
+     
+    			// mark all multiples of 'i' as non prime
+    			for (int j=i*2; j<MAX; j=j+i)
+    			{
+    				primes[j] -= 1;
+     
+    				
+    				if ( (primes[j] + 3) == 0)
+    					result.push_back(j);
+    			}
+    		}
+    	}
+     
+    	// Sort all smart numbers
+    	sort(result.begin(), result.end());
+     
+    	// return n'th smart number
+    	//return result[n-1];
+    }
+     
+    // Driver program to run the case
+    int main()
+    {
+       smartNumber();
+       int t,n;
+       cin>>t;
+       while(t--)
+        {
+          cin>>n;
+          cout<<result[n-1]<<endl;
+         } 
+    	return 0;
+    }
+     

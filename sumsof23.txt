@@ -1,0 +1,30 @@
+    #include<iostream>
+    using namespace std ;
+    #define MAX 1000001
+    #define MOD 1000000007
+    int dp[MAX]={0};
+    void solve()
+    {
+       // memset(dp,0,sizeof(int));
+        dp[0]=0;
+        dp[1]=0;
+        dp[2]=1;
+        dp[3]=1;
+        for(int i=4;i<=MAX;i++)
+        {
+            dp[i]=(dp[i-2]+dp[i-3])%MOD;
+        }
+    }
+    int main()
+    {
+     int t;
+     cin>>t;
+     solve();
+     while(t--)
+     {
+         int n;
+         cin>>n;
+         cout<<dp[n]<<endl;
+     }
+     return 0;
+    } 

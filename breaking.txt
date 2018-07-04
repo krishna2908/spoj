@@ -1,0 +1,39 @@
+    #include<bits/stdc++.h>
+    using namespace std;
+    int main()
+    {
+    	int t,c=0;
+    	cin>>t;
+    	while (t--)
+    	{
+    		c++;
+    		int n,i=0;
+    		cin >> n;
+    		int temp = n;
+    		cout << "Case " << c << ": ";
+    		int f = 0;
+    		while (n % 2 == 0)
+    		{
+    			n /= 2;
+    			f = 1;
+    		}
+    		if (f == 1)cout << "2" << " ";
+    		f = 0;
+    		for (int i = 3; i <= sqrt(temp); i = i + 2)
+    		{
+    			f = 0;
+    			while (n%i == 0)
+    			{
+    			
+    				n = n / i;
+    				f = 1;
+    			}
+    			if (f == 1)	cout<<i<<" ";
+    		}
+    		if (n > 2)
+    			cout << n;
+    		cout << endl;
+    	}
+    	return 0;
+    } 
+

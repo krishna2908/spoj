@@ -1,0 +1,76 @@
+
+Selected submissions:
+?
+Source code 19390674
+
+SPOJ submission 19390674 (C++ 4.3.2) plaintext list. Status: TLE, problem LIS2, contest SPOJ. By krishnakatikam (krishnakatiakm), 2017-05-12 15:09:52.
+
+    #include<bits/stdc++.h>
+    using namespace std;
+    #define MAX 100001
+    int   n;
+    class P
+    {
+      public : int x,y;
+     P()
+     {
+          x=y=0;
+     }
+      }arr[MAX];
+    void scan(int &number)
+    {
+        bool negative = false;
+        register int c;
+     
+        number = 0;
+        c = getchar();
+        if (c=='-')
+        {
+            negative = true;
+            c = getchar();
+        }
+        for (; (c>47 && c<58); c=getchar())
+            number = number *10 + c - 48;
+        if (negative)
+            number *= -1;
+    }
+    long long  LIS()
+    {
+        long long *lis ;
+        lis = (long long *) malloc ( sizeof( long long ) * n );
+      for(int i=0;i<n;i++)
+      {
+         lis[i]=1;
+       }
+        for(int i=1;i<n;i++)
+         {
+            for(int j=0;j<i;j++)
+             {
+               if(arr[i].x>arr[j].x&&arr[i].y>arr[j].y&&lis[i]<lis[j]+1)
+                 lis[i]=lis[j]+1;
+               }
+            }
+           /* for(int i=0;i<n;i++)
+                cout<<lis[i]<<" ";*/
+      long long  m= *max_element(lis,lis+n);
+    free(lis);
+       return m;
+       }
+     
+    int main()
+    {
+        scan(n);
+           int n1,n2;
+             for(int i=0;i<n;i++){
+                  scan(n1);
+                  
+                  scan(n2);
+                  arr[i].x=n1;
+                   arr[i].y=n2;}
+                  
+     
+            printf("%lld\n",LIS());      
+    return 0;
+    }      
+      
+

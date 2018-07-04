@@ -1,0 +1,163 @@
+    #include<iostream>
+    #include<cmath>
+    using namespace std;
+    int val(string str)
+    {
+        if(str=="063")return 0;
+        if(str=="010")return 1;
+        if(str=="093")return 2;
+        if(str=="079")return 3;
+        if(str=="106")return 4;
+        if(str=="103")return 5;
+        if(str=="119")return 6;
+        if(str=="011")return 7;
+        if(str=="127")return 8;
+        if(str=="107")return 9;
+    }
+    int main()
+    {
+       string str;
+       while(1)
+       {
+        //    string s1,s2;
+            cin>>str;
+             if(str=="BYE")break;
+             //cout<<"hi ";
+            long long  int flag=0,a=0,b=0,k=0,i=0;
+            while(str[i]!='=')
+            {
+               if(str[i]=='+'){
+                    flag=1;
+                    i++;
+                    continue;
+               }
+               if(str[i]=='=')break;
+               // cout<<" hai"<<endl;
+               if(flag==1)
+                {
+                     char  s1[3];
+                    // cout<<"hi"<<endl;
+                     int k=0;
+                      //cout<<str[i]<<str[i+1]<<str[i+2];
+                     s1[k]=str[i];  
+                     s1[k+1]=str[i+1]; 
+                     s1[k+2]=str[i+2]; 
+                     s1[k+3]='\0';
+                    k=0;
+                    i+=3;
+                // cout<<s1[k]<<s1[k+1]<<s1[k+2]<<endl;
+                    a=a*10+val(s1);
+                //  cout<<s1<<endl;
+                }     
+                else if(flag==0)
+                 {
+                     k=0;
+                     char s2[3];
+                     s2[k]=str[i];
+                     s2[k+1]=str[i+1];
+                     s2[k+2]=str[i+2];
+                     k=0;
+                     s2[k+3]='\0';
+                     // cout<<s2<<endl;
+                //      cout<<str[i]<<str[i+1]<<str[i+2];
+                      i+=3;
+                ///      cout<<"2"<<" "<<s2;
+                  // cout<<s2[k]<<s2[k+1]<<s2[k+2]<<endl;
+                  //   cout<<s2<<endl;
+                      b=b*10+val(s2);
+              //         s2.clear();   
+                 }
+            }
+        long  int res=a+b;
+        if(res==0)continue;
+         //cout<<res<<endl;
+      long int temp,rem;
+     temp=res;
+    long int c=0;
+    cout<<str;
+    char r[10000];
+      
+      while(temp!=0)
+      {
+      rem=temp%10;
+       temp/=10;
+       if(rem==0)
+       {
+        r[c++]='3';
+        r[c++]='6';
+        r[c++]='0';
+        continue;
+       }
+       if(rem==1)
+       {
+        r[c++]='0';
+        r[c++]='1';
+        r[c++]='0';
+        continue;
+       }
+        if(rem==2)
+       {
+        r[c++]='3';
+        r[c++]='9';
+        r[c++]='0';
+        continue;
+       }
+        if(rem==3)
+       {
+        r[c++]='9';
+        r[c++]='7';
+        r[c++]='0';
+        continue;
+       }
+        if(rem==4)
+       {
+        r[c++]='6';
+        r[c++]='0';
+        r[c++]='1';
+        continue;
+       }
+        if(rem==5)
+       {
+         r[c++]='3';
+        r[c++]='0';
+        r[c++]='1';
+        continue;
+       }
+        if(rem==6)
+       {
+        r[c++]='9';
+        r[c++]='1';
+        r[c++]='1';
+        continue;
+       }
+        if(rem==7)
+       {
+        r[c++]='1';
+        r[c++]='1';
+        r[c++]='0';
+        continue;
+       }
+        if(rem==8)
+       {
+        r[c++]='7';
+        r[c++]='2';
+        r[c++]='1';
+        continue;
+       }
+        if(rem==9)
+       {
+        r[c++]='7';
+        r[c++]='0';
+        r[c++]='1';
+        continue;
+       }
+      }
+     
+      for(i=c-1;i>=0;i--)
+                 cout<<r[i];
+      cout<<endl;
+     }
+     return 0;
+    }
+     
+

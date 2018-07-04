@@ -1,0 +1,47 @@
+    #include<bits/stdc++.h>
+    using namespace std;
+    class res
+    {
+      public:   int s,c;
+     
+    };
+    int main()
+    {
+      int n;
+        res a[101][101]={0};
+      while(scanf("%d",&n)!=-1)
+      {
+         res a[105][105]={0};
+       
+          for(int i=0;i<n;i++)scanf("%d",&a[i][i].c);
+          for(int l=2;l<=n;l++)
+          {
+              for(int i=0;i<=n-l;i++)
+              {
+                  int j=l+i-1;
+               int min=INT_MAX;
+               for(int k=i;k<=j-1;k++)
+               {
+                   int tmp=a[i][k].s+a[k+1][j].s+(a[k+1][j].c)*(a[i][k].c) ;
+                  if(min>tmp)
+                  {
+                  //    cout<<"i--> "<<i<<"j--->"<<j<<endl;
+                      min=tmp;
+                      a[i][j].c= (a[i][k].c+ a[k+1][j].c) %100 ;
+                      a[i][j].s=tmp;
+                  }
+                }
+           }
+       }
+     
+      //for(int i=0;i<n;i++){
+        //  printf("\n");
+      
+      //for(int j=0;j<n;j++)
+           printf("%d\n",a[0][n-1].s);
+          
+      
+      }
+     
+        return 0;
+    } 

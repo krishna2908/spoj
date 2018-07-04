@@ -1,0 +1,42 @@
+
+Selected submissions:
+?
+Source code 19000547
+
+SPOJ submission 19000547 (C++ 4.3.2) plaintext list. Status: AC, problem ENCONDIN, contest SPOJ. By krishnakatikam (krishnakatiakm), 2017-03-17 20:31:39.
+
+    #include<bits/stdc++.h>
+    using namespace std;
+    int main()
+    {
+        char str[10001];
+        int i=0,j=0,k=0; 
+    while(gets(str))
+    	{
+    	 int	len = strlen(str);
+    		 i=0;
+    		 char ch;
+    		while(i<len)
+    		{
+    			if(str[i]!=str[i+1])
+    			{
+    				 cout<<"1";
+    				for(j=i; j<len && str[j]!=str[j+1]; j++, i++)
+    				{
+    					if(str[j]=='1') cout<<"11";
+    					else  cout<<str[j];
+    				}
+    				cout<<"1";
+    			}
+    			else
+    			{
+    				ch = str[i];
+    				for(j=i, k=0; j<len && k<9 && str[j]==ch; j++, i++, k++);
+    				cout<<k<<ch;
+    			}
+    		}
+    		cout<<endl;
+    	}
+    	return 0;
+    } 
+

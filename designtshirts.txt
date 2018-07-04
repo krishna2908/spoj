@@ -1,0 +1,81 @@
+
+Selected submissions:
+?
+Source code 19095691
+
+SPOJ submission 19095691 (C++ 4.3.2) plaintext list. Status: AC, problem TAP2012D, contest SPOJ. By krishnakatikam (krishnakatiakm), 2017-03-28 19:43:33.
+
+    #include <bits/stdc++.h>
+    using namespace std;
+    char str[100000+1];
+    int c;
+    bool flag=1;
+    struct trie
+    {
+        struct trie* child[26];
+        int t1,t2;
+    };
+    struct trie* get()
+    {
+        struct trie* node= new trie; 
+        node->t1=0;
+        node->t2=0;
+        for(int i=0;i<26;i++){node->child[i]=NULL;}
+        return node;
+    }
+    void insert(struct trie* root)
+    {
+        
+        struct trie *node=root;
+         int len= strlen(str);
+        for(int i=0;i<len;i++)
+        {
+        //   cout<<" hai"<<endl;
+            int index=str[i]-'A';
+     //         cout<<index<<endl;
+            if(node->child[index]==NULL)
+               node->child[index]=get();
+          node=node->child[index];
+            if(flag==0)
+            node->t1++;
+           if(flag==1)
+              node->t2++;
+              if(node->t1>=1&&node->t2>=1){c++;
+                    node->t1--;
+                    node->t2--;
+            
+          }
+    }
+    }
+    int main()
+    {
+        while(1)
+        {
+            int n;
+            // c==0;
+            struct trie *root=get(); 
+            scanf("%d",&n);
+        //cout<<n<<endl;
+           //cin>>n;
+            if(n==-1)break;
+             for(int i=0;i<n;i++){
+             flag=0;
+             scanf("%s",str);
+      //          cin>>str;
+         // cout<<str<<endl;
+              insert(root);
+             }
+             for(int i=0;i<n;i++)
+             {
+                 flag=1;
+                  //scanf("%s",str);
+                   cin>>str;
+                  insert(root);
+             }
+           printf("%d\n",c);
+            c=0;
+        }
+        return 0;
+    }
+     
+

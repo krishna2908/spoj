@@ -1,0 +1,41 @@
+
+Selected submissions:
+?
+Source code 19814900
+
+SPOJ submission 19814900 (C++ 4.3.2) plaintext list. Status: AC, problem ANARC05H, contest SPOJ. By krishnakatikam (krishnakatiakm), 2017-07-17 21:55:40.
+
+    #include<bits/stdc++.h>
+    using namespace std;
+    int digit[26],len;
+    int calc(int pos,int prevSum){
+        int ans = 0,sum = 0;
+     
+        if(pos == len)
+            return 1;
+        for(int i = pos;i < len;i++){
+            sum += digit[i];
+            if(sum >= prevSum)
+                ans += calc(i+1,sum);
+        }
+        return ans;
+    }
+     
+    int main(){
+        int i,c = 1;
+        char s[26];
+     
+        while(scanf("%s",s)==1){
+            if(s[0] == 'b')
+                break;
+            for(i=0; s[i]!=0; i++){
+                digit[i] = s[i] - '0';
+            }
+            len = i;
+            printf("%d. %d\n",c++,calc(0,0));
+        }
+     
+        return 0;
+    }
+     
+

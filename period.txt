@@ -1,0 +1,92 @@
+    #include<bits/stdc++.h>
+    using namespace std;
+    long long int lps[10000000+1],M;
+    string pat;
+    void fun()
+      {
+      //   cout<<" enter the dragon; \n"  ;
+        int len = 0;
+     
+        lps[0] = 0; // lps[0] is always 0
+        int i = 1;
+        while (i < M)
+        {
+            if (pat[i] == pat[len])
+            {
+                len++;
+                lps[i] = len;
+                i++;
+            }
+            else {
+            if (len != 0)
+                {
+                    len = lps[len-1];
+                }
+                else // if (len == 0)
+                {
+                    lps[i] = 0;
+                    i++;
+                }
+            }
+        
+          
+            
+        }
+         
+            
+            
+        
+    for(int i=0;i<M;i++){
+                  if(lps[i]==0)continue;
+         int pos=i+1-lps[i];
+         //cout<<"pos "<<pos<<endl;
+         if((i+1)%pos!=0)continue;
+           //cout<<" count ;"<<endl;
+          printf("%d %d\n", i + 1, (i + 1) /pos);
+     
+    }
+    }
+     
+    /*void check()
+    {
+       
+       long long  int  ls = M - lps[M-1];
+        if(M==1){
+        //    cout << "1" << endl;
+        }
+        else if( ls!=1 && M%ls==0){
+            long long int  res = M/ls;
+          //  cout << res << endl;
+        }
+        else if(ls==1){
+            //cout <<M<< endl;
+        }
+        else{
+            cout << "1" << endl;
+        }
+    }*/
+    int main()
+    {
+        int t;
+        scanf("%d",&t);
+        // cout<<t<<endl;
+        int c=1;
+        while(t--)
+        {
+         
+            printf("Test case #%d\n", c++);
+              int len;
+            cin>>len;
+             cin>>pat;
+         //scanf("%s",pat);
+            M=len;
+             fun();
+           //check();
+          //  cout<<endl; 
+        }
+     
+        return 0;
+    } 
+     
+     
+

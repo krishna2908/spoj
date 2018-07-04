@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    string str ;
+    int dp[5001];
+    while(cin>>str)
+    {
+         if(str[0]=='0')break;
+         memset(dp,0,sizeof(dp)); 
+         dp[0]=dp[1]=1;
+        for(int i=2;i<=str.length();i++)
+        {
+                char pres=str[i-1],prev=str[i-2];
+                if(prev=='1')dp[i]+=dp[i-2];
+            	if(prev=='2' &&  pres<='6')dp[i]+= dp[i-2];
+        		if(pres!='0') dp[i] += dp[i-1];
+        }
+    cout<<dp[str.length()]<<endl;
+    }
+    return 0;
+}

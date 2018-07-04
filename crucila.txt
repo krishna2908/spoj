@@ -1,0 +1,38 @@
+    #include<bits/stdc++.h>
+    using namespace std;
+    #define ll long long int 
+    //#define max 1000005
+    ///vector<bool>mark;
+    ll gcd(ll a, ll b)
+    {
+        if (a == 0)
+            return b;
+        return gcd(b%a, a);
+    } 
+    int main()
+    {
+     // mark.assign(max,true);
+      //sieve();
+      ll t,temp;
+             cin>>t;
+             ll k=0;
+             while(t--)
+              {
+                 k++;
+                 ll a,b,c;
+                 cin>>a>>b>>c;
+                     
+                           temp=gcd(a,b);
+                          //bool flag=false;
+                           // temp=gcd(temp,c);
+                          if(c%temp==0)
+                           {
+                             cout<<"Case "<<k<<": Yes"<<endl;
+                            }
+                            else
+                               cout<<"Case "<<k<<": No"<<endl;
+                        }
+                        return 0;
+                        }     
+                                      
+

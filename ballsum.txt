@@ -1,0 +1,40 @@
+    #include<bits/stdc++.h>
+    using namespace std;
+    #define ll long long int
+    ll gcd(ll a, ll b){ return (b==0)? a : gcd(b, a%b);}
+    int main()
+     {
+          unsigned long long int n,k;
+          while(true)
+          {
+               scanf("%lld%lld",&n,&k);
+               if(n==-1&&k==-1){break;}
+               else if(k<=2){cout<<"0"<<endl;  }
+               else
+                   {
+                        ll temp=(k-1)/2;
+                        ll p=temp*k-temp*(temp+1);
+                         ll q;
+                         if(n%2==0){
+                              q=n/2*(n-1);
+                         }
+                         else
+                             q=n*(n-1)/2;
+                        while(true)
+                         {
+                         ll g=gcd(p,q);
+                          if(g==1)break;
+                         p/=g;
+                         q/=g;
+                         
+                       }
+                   
+               if(q==1){cout<<p<<endl;}
+                else
+                  cout<<p<<"/"<<q<<endl;
+               }
+               }
+     return 0;
+              
+          } 
+

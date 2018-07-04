@@ -1,0 +1,65 @@
+
+Selected submissions:
+?
+Source code 18442224
+
+SPOJ submission 18442224 (C++ 4.3.2) plaintext list. Status: AC, problem DIVFACT, contest SPOJ. By krishnakatikam (krishnakatiakm), 2016-12-23 18:20:50.
+
+    #include<bits/stdc++.h>
+    using namespace std;
+    #define ll long long int 
+    #define mod 1000000009
+    vector<int> allPrimes;
+    void sieve()
+    {
+        vector<bool> prime(50000+1, true);
+       for (int p=2; p*p<=50000; p++)
+        {
+            if (prime[p] == true)
+            {
+                for (int i=p*2; i<=50000; i += p)
+                    prime[i] = false;
+            }
+        }
+        for (int p=2; p<=50000; p++){
+            if (prime[p]){
+                allPrimes.push_back(p);
+               //  cout<<p<<","<<endl;
+              }
+    }
+    }
+    ll fact(int n)
+    {
+        ll res=1;
+        for(int i=0; allPrimes[i]<=n; i++)
+        {
+            int num=n;
+            ll s=0;
+            while(num)
+            {
+                s+=num/allPrimes[i];
+                num/=allPrimes[i];
+            }
+            res=(res*(s+1))%1000000007;
+        }
+        return  res;
+    }
+    int main()
+     {
+      sieve();
+      //fact();
+       int t;
+       scanf("%d",&t);
+        int n;
+        while(t--)
+         {
+           
+             scanf("%d",&n);
+              if(n==0||n==1){cout<<"1"<<endl;
+               continue;
+              }
+             printf("%lld\n",fact(n));
+             }
+             return 0;
+     } 
+

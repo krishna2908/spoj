@@ -1,0 +1,25 @@
+    #include <bits/stdc++.h>
+    using namespace std;
+    int main() {
+       int t,h,w;
+        cin>>t;
+       while(t--)
+       {
+           cin>>h>>w;
+          int a[h+1][w+1];
+          memset(a,0,sizeof(a));
+          for(int i=1;i<=h;i++)
+             for(int j=1;j<=w;j++)
+                 cin>>a[i][j];
+          for(int i=1;i<=h;i++)		
+             for(int j=1;j<=w;j++)
+                a[i][j]+=max(a[i-1][j-1],max(a[i-1][j],a[i-1][j+1]));
+          int ans=a[h][1];
+          for(int i=2;i<=w;i++)
+             if(a[h][i]>ans)
+                ans=a[h][i];
+          cout<<ans<<endl;
+       }
+     
+       return 0;
+    } 

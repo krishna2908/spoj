@@ -1,0 +1,68 @@
+
+Selected submissions:
+?
+Source code 20731707
+
+SPOJ submission 20731707 (C++ 4.3.2) plaintext list. Status: AC, problem DCEPC206, contest SPOJ. By krishnakatikam (krishnakatiakm), 2017-12-04 19:13:28.
+
+    #include<bits/stdc++.h>
+    using namespace std;
+    #define INT_SIZE 32
+    struct TrieNode
+    {
+        long  long int lsum;
+    	TrieNode *arr[2];
+    };
+    TrieNode *newNode()
+    {
+    	TrieNode *temp = new TrieNode;
+    	temp->lsum=0;
+    	temp->arr[0] = temp->arr[1] = NULL;
+    	return temp;
+    }
+    long long int sum=0;
+    void insert(TrieNode *root, int data)
+    {
+    	TrieNode *temp = root;
+    	for (int i=INT_SIZE-1; i>=0; i--)
+    	{
+    		bool val = data & (1<<i);
+    	//	cout<<val<<endl;
+    		if (temp->arr[val] == NULL)
+    			temp->arr[val] = newNode();
+            if(val==1)
+            {
+              if((temp->arr[0])){//
+               // 	cout<<"here";
+                
+               sum+= (temp->arr[0])->lsum;
+               }
+              
+              //if(!t) sum+=t->lsum;
+            }
+             temp = temp->arr[val];
+             temp->lsum= temp->lsum+data;
+        }
+    }
+    int main()
+    {
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        sum=0;
+        TrieNode *root =newNode();
+        int n;
+        cin>>n;
+        for(int i=0;i<n;i++)
+        {
+        int temp ;
+        cin>>temp;
+        insert(root,temp);
+    	}
+      cout<<sum<<endl;
+    }
+    return 0;
+    }
+     
+

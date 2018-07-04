@@ -1,0 +1,37 @@
+    #include<bits/stdc++.h>
+    using namespace std;
+     int gcd(int a,int b)
+    {
+        if (a == 0)
+            return b;
+        return gcd(b%a, a);
+    }
+     int lcm( int a , int b)
+    {
+      long long  int res=(a*b)/gcd(a,b);
+      return res;
+    }
+    int main()
+    {
+      int t;
+      cin>>t;
+      while(t--)
+      {
+        int a,b,n;
+        cin>>a>>b>>n;
+        if (a==b)cout<<(long long  int )a*n<<endl;
+        long long int res=n*a*b;
+        long long int tmp=(a+b) - (a*b)/lcm(a,b);
+        long long int val=(long long )res/tmp;
+        if(val%a==0 || val%b==0)cout<<val<<endl;
+        else
+        {
+             long long int rem1=val/min(a,b);
+             long long int s1=(rem1+1)*min(a,b),s2=(rem1)*max(a,b);
+             if(rem1>s1)cout<<rem1<<endl;
+             else cout<<s1<<endl;         
+       }
+      } 
+      return 0;
+     } 
+         

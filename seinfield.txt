@@ -1,0 +1,39 @@
+
+Selected submissions:
+?
+Source code 19584167
+
+SPOJ submission 19584167 (C++ 4.3.2) plaintext list. Status: AC, problem ANARC09A, contest SPOJ. By krishnakatikam (krishnakatiakm), 2017-06-10 03:45:54.
+
+    #include<bits/stdc++.h>
+    using namespace std;
+    int main()
+    {
+       int k=0;
+    	while ( 1 )
+    	{
+    		string str;
+    		cin >> str;
+     
+           if(str[0]=='-')break;
+           	stack<char> s;
+    	int res = 0;
+    	for ( int i = 0; i < str.length(); i++ )
+    	{
+    		char c = str[ i ];
+    		if ( c == '{' )
+    			s.push( c );
+    		else if (  !s.empty() && s.top() == '{' )
+    			s.pop();
+    		else {
+    			res++;
+    			s.push( '{' );
+    		}
+    	}
+    		cout  << ++k << ". " << res +s.size() / 2 <<endl;
+     
+    	}
+    	return 0;
+    }
+     
+

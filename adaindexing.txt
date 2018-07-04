@@ -1,0 +1,69 @@
+
+Selected submissions:
+?
+Source code 19073681
+
+SPOJ submission 19073681 (C++ 4.3.2) plaintext list. Status: AC, problem ADAINDEX, contest SPOJ. By krishnakatikam (krishnakatiakm), 2017-03-26 11:35:31.
+
+    #include<bits/stdc++.h>
+    using namespace std;
+    #define size 26
+    string str,rev;
+    struct trie
+    {
+       struct trie* child[size];
+        int count;
+    };
+    struct trie* get()
+    {
+      struct trie* node=new trie;
+      for(int i=0;i<26;i++)node->child[i]=NULL;
+       node->count=0;
+    return node;
+    }
+    void insert(struct trie* root)
+    {
+       struct trie* node=root;
+     for(int i=0;i<str.length();i++){ 
+      //for(int i=size-1;i>=0;i--)
+      // {
+           int index=str[i]-'a';
+              if(node->child[index]==NULL)
+                  node->child[index]=get();
+             node=node->child[index];
+             node->count++; 
+         }
+     }
+    void fun(struct trie* root)
+    {
+       struct trie* node=root;
+       for(int i=0;i<rev.length();i++)
+       {
+           int index=rev[i]-'a';
+          if(node->child[index]==NULL)
+    {         printf("0\n");
+            return ;}
+          else
+             node=node->child[index];
+    }
+      printf("%d\n",node->count);
+    }
+    int main(){
+      int n,q;
+       struct trie* root=get();
+       cin>>n>>q;
+         for(int i=0;i<n;i++)
+          {
+           cin>>str;
+            insert(root);
+           }
+         while(q--){
+         cin>>rev;
+             fun(root);
+         }
+         
+    return 0;
+    }
+           
+     
+

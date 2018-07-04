@@ -1,0 +1,66 @@
+
+Selected submissions:
+?
+Source code 18365521
+
+SPOJ submission 18365521 (CPP) plaintext list. Status: AC, problem APS, contest SPOJ. By krishnakatikam (krishnakatiakm), 2016-12-12 07:42:38.
+
+    #include<bits/stdc++.h>
+    using namespace std;
+    #define ll long long int
+    #define mx 10000005
+    bool mark[mx];
+    ll lpd[mx];
+    //vector<ll>prime;
+    //vector<bool>mark;
+    void seive()
+    {
+    	lpd[1] = 1;
+    	lpd[0] = 1;
+    	for (int i = 2; i < mx ; i=i+2)
+    	{
+    		lpd[i] = 2;
+    		mark[i]=true;
+    	}
+    	for (ll i = 3; i < mx ; i=i+2)
+    	{
+    		if (!mark[i])
+    		{
+    			lpd[i]=i;
+    			for (ll j = i ; j*i < mx ; j+=2)
+    			{
+    				if (mark[j*i]==false)
+    				{
+    					lpd[i*j] = i;
+    					mark[i*j] = true;
+    				}
+    			}
+    		}
+    	}
+         for(ll i=3;i<mx;i++)
+         {
+            //cout<<lpd[i]<<endl;
+            lpd[i]+=lpd[i-1];
+          } 
+     
+     
+    }
+    int main()
+     {
+      int t;
+      seive();
+       cin>>t;
+        while(t--)
+         {
+           ll n;
+           cin>>n;
+            cout<<lpd[n]<<endl;
+          }
+          return 0;
+      }      
+           
+     
+     
+     
+     
+

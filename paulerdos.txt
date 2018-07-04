@@ -1,0 +1,46 @@
+    #include<bits/stdc++.h>
+    using namespace std;
+    const int MAX = 10000009;
+    const int LMT = 3164;
+    int flag[MAX>>6], mark[MAX];
+    #define ifc(x) (flag[x>>6]&(1<<((x>>1)&31)))
+    #define isc(x) (flag[x>>6]|=(1<<((x>>1)&31)))
+    void sieve() {
+    	int i, j, k;
+    	for(i=3; i<LMT; i+=2)
+    		if(!ifc(i))
+    			for(j=i*i, k=i<<1; j<MAX; j+=k)
+    				isc(j);
+    }
+    bool isprime(int n) {
+    	if(n<2) return false;
+    	if(n==2) return true;
+    	if(n&1 && !ifc(n)) return true;
+    	return false;
+    }
+    void fun() {
+    	int x, y, p, q, n;
+    	for(x=0; (p=x*x) < MAX; x++) {
+    		for(y=0; (q=y*y*y*y) < MAX; y++) {
+    			n = p + q;
+    			if(n < MAX && isprime(n)) {
+    				mark[n] = 1;
+    			}
+    		}
+    	}
+    	for(n=1; n<MAX; n++) 
+    	        {mark[n] += mark[n-1];}
+    }
+    int main() {
+    	sieve();
+    	fun();
+    	int t, n;
+    	    cin>>t;
+    	     while(t--){
+    		scanf("%d", &n);
+    		printf("%d\n", mark[n]);
+             }
+     
+    	return 0;
+    } 
+

@@ -1,0 +1,88 @@
+
+Selected submissions:
+?
+Source code 19052157
+
+SPOJ submission 19052157 (C++ 4.3.2) plaintext list. Status: AC, problem FILRTEST, contest SPOJ. By krishnakatikam (krishnakatiakm), 2017-03-23 18:47:06.
+
+    #include<iostream>
+    #include<vector>
+    #include<algorithm>
+    #include<cstdio>
+    #include<cstring>
+    using namespace std;
+    int val;
+    string str;
+    void Zarr(int z[])
+    {
+         int n = str.length();
+         z[0]=0;
+        int L, R, k;
+        L = R = 0;
+        for (int i = 1; i < n; ++i)
+        {
+            if (i > R)
+            {
+                L = R = i;
+     
+                while (R<n && str[R-L] == str[R])
+                    R++;
+                z[i]=( R-L) ;
+                R--;
+            }
+            else
+            {
+                k = i-L;
+     
+                if (z[k] < R-i+1)
+                     z[i]=(z[k]);
+     
+                else
+                {
+                    L = i;
+                    while (R<n && str[R-L] == str[R])
+                        R++;
+                    z[i]=( R-L) ;
+                    R--;
+                }
+            }
+        }
+      //  for(int i=0;i<n;i++)cout<<z[i]<<" ";
+       // cout<<endl;
+    long long int temp=0,pos=0;
+    for(int i=0;i<n;i++)
+    {
+        if(i+z[i]==n){
+             temp=z[i];
+            break;
+        }
+    }
+    //cout<<temp<<endl;
+    temp=n-temp;
+    pos=(val-n)/temp;    
+    cout<<pos+1<<endl;
+        
+    }
+    int main()
+    {
+        while(1)
+        {
+            
+             cin>>val;  
+              cin>>str;
+              
+               if(val==-1&&str[0]=='*')break;
+              int len=str.length();
+             if(len>val){cout<<"0"<<endl;
+                      continue;}
+                      if(len==val){cout<<"1"<<endl;
+                        continue;}
+             int z[len+1];
+              
+              Zarr(z);
+            
+        }
+        return 0;
+    } 
+     
+

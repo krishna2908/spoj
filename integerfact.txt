@@ -1,0 +1,40 @@
+    #include<bits/stdc++.h>
+    using namespace std;;
+    int main()
+     {
+       long long int num;
+        while(true)
+         {
+           scanf("%lld",&num);
+            if(num==0)
+             {
+              break;
+             }
+              // cout<<num<<endl;
+              long long int temp=num;
+               long long  int i=2;
+               while(i*i<=temp)
+                {
+                    long long int  count=0;
+                      //cout<<i<<endl;
+                    if(num%i==0)
+                     {
+                       while(num%i==0)
+                        {
+                          count++;
+                          num/=i;
+                        }
+                        printf("%lld^%lld ",i,count);
+                      
+                    }
+                   i++;          
+                 }
+                 if(num!=1)
+                    {
+                       printf("%lld^1",num);
+                     }       
+               printf("\n");
+               }      
+               return 0;
+            }    
+

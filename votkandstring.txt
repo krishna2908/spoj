@@ -1,0 +1,84 @@
+    #include<iostream>
+    #include<vector>
+    #include<algorithm>
+    #include<cstdio>
+    #include<cstring>
+    using namespace std;
+    string str;
+    void Zarr(vector< int>&z)
+    {
+        //cout<<str;
+         
+         int n = str.length();
+         z.push_back(n);
+        int L, R, k;
+        L = R = 0;
+        for (int i = 1; i < n; ++i)
+        {
+            if (i > R)
+            {
+                L = R = i;
+     
+                while (R<n && str[R-L] == str[R])
+                    R++;
+                z.push_back( R-L) ;
+                R--;
+            }
+            else
+            {
+                k = i-L;
+     
+                if (z[k] < R-i+1)
+                     z.push_back(z[k]);
+     
+                else
+                {
+                    L = i;
+                    while (R<n && str[R-L] == str[R])
+                        R++;
+                    z.push_back( R-L) ;
+                    R--;
+                }
+            }
+        }
+    //cout<<z.size()<<endl;
+     
+         sort(z.begin(),z.end());
+     
+           //vector<int>:: iterator i;
+          //for(i=z.begin();i!=z.end();i++)cout<<*i<<endl;  
+          long long int b;
+        scanf("%lld",&b);
+          for(long long int i=0;i<b;i++)
+          {
+             int m;
+              scanf("%d",&m);
+              printf("%d ",n-(lower_bound(z.begin(),z.end(),m)-z.begin()));
+          }
+        
+    }
+    int main()
+    {
+      long long  int t;
+     
+       scanf("%lld",&t);
+        while(t--)
+        {
+            //string text;
+            vector< int>z;
+             // z.clear();
+              cin>>str;
+            Zarr(z);
+           // int l=str.length();
+         //  long long int l=z.size(); 
+             //cout<<" "<<l<<" ";
+            
+         
+          z.clear();
+        
+            printf("\n");
+        }
+        return 0;
+    } 
+
+
